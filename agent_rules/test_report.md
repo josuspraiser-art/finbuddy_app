@@ -6,10 +6,10 @@ This document records the results and execution status of all unit and instrumen
 
 ## 📊 Summary of Test Results (Current Run)
 
-* **Last Updated:** 2026-06-11T13:10:21+05:30 (Local Time)
+* **Last Updated:** 2026-06-11T15:15:00+05:30 (Local Time)
 * **Build / Test Status:** `SUCCESSFUL`
-* **Total Tests Executed:** 26 (Unit Tests)
-* **Total Passed:** 26
+* **Total Tests Executed:** 39 (Unit Tests)
+* **Total Passed:** 39
 * **Total Failed:** 0
 * **Success Rate:** 100%
 
@@ -19,6 +19,8 @@ This document records the results and execution status of all unit and instrumen
 | [AuthViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/auth/AuthViewModelTest.kt) | Local Unit Test | 8 | 8 | 0 | PASSED |
 | [AccountViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/accounts/AccountViewModelTest.kt) | Local Unit Test | 8 | 8 | 0 | PASSED |
 | [TransactionViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/transactions/TransactionViewModelTest.kt) | Local Unit Test | 9 | 9 | 0 | PASSED |
+| [CategoryViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/CategoryViewModelTest.kt) | Local Unit Test | 7 | 7 | 0 | PASSED |
+| [BudgetViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/BudgetViewModelTest.kt) | Local Unit Test | 6 | 6 | 0 | PASSED |
 | [ExampleInstrumentedTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/androidTest/java/com/example/findbuddy/ExampleInstrumentedTest.kt) | Instrumented Test | 1 | - | - | UNRUN (Requires Device/Emulator) |
 
 ---
@@ -92,6 +94,33 @@ This document records the results and execution status of all unit and instrumen
 | 8 | `save transfer succeeds` | Validates saving a valid transfer triggers correct state updates. | PASSED |
 | 9 | `delete transaction succeeds` | Validates transaction deletion triggers successfully. | PASSED |
 
+### 5. CategoryViewModelTest (MVI & Category Management)
+* **Class Path:** `com.example.findbuddy.ui.categories.CategoryViewModelTest`
+* **File:** [CategoryViewModelTest.kt](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/CategoryViewModelTest.kt)
+
+| Sr. No. | Test Case Name | Description | Status |
+| :---: | :--- | :--- | :---: |
+| 1 | `initial state has empty list and is not loading after initialization` | Validates that category initial state has empty list and loading is false after scheduler initialization. | PASSED |
+| 2 | `intent load categories fetches list and triggers sync` | Validates that load categories loads from local repository and triggers sync. | PASSED |
+| 3 | `create category fails when name is empty` | Validates that category creation fails with error when name is empty. | PASSED |
+| 4 | `create category fails when name is blank` | Validates that category creation fails with error when name is blank (spaces). | PASSED |
+| 5 | `create category fails when name is duplicate` | Validates that duplicate category name creation is prevented with a unique constraint error. | PASSED |
+| 6 | `create category succeeds with valid params` | Validates that category creation succeeds with valid name and type. | PASSED |
+| 7 | `dialog actions update state correctly` | Validates that opening, typing, and dismissing create dialog modifies UI state properties correctly. | PASSED |
+
+### 6. BudgetViewModelTest (MVI & Budget/Limits Management)
+* **Class Path:** `com.example.findbuddy.ui.categories.BudgetViewModelTest`
+* **File:** [BudgetViewModelTest.kt](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/BudgetViewModelTest.kt)
+
+| Sr. No. | Test Case Name | Description | Status |
+| :---: | :--- | :--- | :---: |
+| 1 | `initial state has empty budgets list` | Validates that budget initial state has empty budgets and zero total monthly spends. | PASSED |
+| 2 | `open limit dialog populates selected category and current limit` | Validates that limit setup dialog overlay populates target category and empty/existing limit correctly. | PASSED |
+| 3 | `save limit fails when amount is empty` | Validates that budget limit creation fails with validation error when amount is empty. | PASSED |
+| 4 | `save limit fails when amount is negative` | Validates that budget limit creation fails with validation error when amount is negative. | PASSED |
+| 5 | `save limit fails when amount is invalid text` | Validates that budget limit creation fails with validation error when amount is non-numeric text. | PASSED |
+| 6 | `save limit succeeds with valid params` | Validates that setting a valid positive budget limit succeeds and closes the dialog. | PASSED |
+
 ---
 
 ## ⏭️ Instructions for Logging Future Test Cases
@@ -113,3 +142,5 @@ All developers and AI agents must update this document whenever new tests are ad
 | 2026-06-11T12:27:11+05:30 | Initial Verification of Module 1 (Auth MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (9 Passed, 0 Failed) | Antigravity AI |
 | 2026-06-11T12:33:02+05:30 | Implementation of Module 2 (Accounts DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (17 Passed, 0 Failed) | Antigravity AI |
 | 2026-06-11T13:10:21+05:30 | Implementation of Module 3 (Transaction MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (26 Passed, 0 Failed) | Antigravity AI |
+| 2026-06-11T15:05:00+05:30 | Implementation of Module 4 (Categories DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (33 Passed, 0 Failed) | Antigravity AI |
+| 2026-06-11T15:15:00+05:30 | Implementation of Module 5 (Budgets DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (39 Passed, 0 Failed) | Antigravity AI |

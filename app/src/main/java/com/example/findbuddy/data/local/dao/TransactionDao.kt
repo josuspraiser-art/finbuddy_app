@@ -35,6 +35,9 @@ interface TransactionDao {
     @Query("SELECT * FROM transfers WHERE id = :id LIMIT 1")
     fun getTransferById(id: String): TransferEntity?
 
+    @Query("SELECT SUM(amount) FROM transactions WHERE userId = :userId AND categoryId = :categoryId AND type = 'EXPENSE' AND date LIKE :datePattern")
+    fun getSpentForCategoryAndPeriod(userId: String, categoryId: String, datePattern: String): Double?
+
     @Query("DELETE FROM transactions")
     fun clearTransactions(): Int
 

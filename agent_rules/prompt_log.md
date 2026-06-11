@@ -120,4 +120,35 @@ For ui design strictly follow this -
 Do not add any screen on own strictly, do not add any own idea.
 ```
 
+---
+
+## Prompt 10
+* **Local Timestamp:** 2026-06-11T14:56:07+05:30
+* **Goal:** Create implementation plan for Module 4
+* **Content:**
+```text
+use @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\android_persona.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_prd.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_kpi.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_scope.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_boundaries.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\api_doc.md]  and create implementation plan for module 4
+
+For ui design strictly follow this - 
+@mcp:StitchMCP:get_project:4639296201462069600
+
+Do not add any screen on own strictly, do not add any own idea.
+```
+
+---
+
+## Prompt 11
+* **Local Timestamp:** 2026-06-11T15:07:26+05:30
+* **Goal:** Create implementation plan for Module 5
+* **Content:**
+```text
+use @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\android_persona.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_prd.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_kpi.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_scope.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_boundaries.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\api_doc.md]  and create implementation plan for module 5
+
+For ui design strictly follow this - 
+@mcp:StitchMCP:get_project:4639296201462069600
+
+Do not add any screen on own strictly, do not add any own idea.
+```
+
+
 

@@ -17,6 +17,8 @@ import com.example.findbuddy.ui.auth.AuthViewModel
 import com.example.findbuddy.ui.dashboard.DashboardScreen
 import com.example.findbuddy.ui.accounts.AccountsScreen
 import com.example.findbuddy.ui.accounts.AccountViewModel
+import com.example.findbuddy.ui.categories.BudgetsScreen
+import com.example.findbuddy.ui.categories.CategoryViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 sealed class Screen(val route: String) {
@@ -24,6 +26,7 @@ sealed class Screen(val route: String) {
     object SignUp : Screen("signup")
     object Dashboard : Screen("dashboard")
     object Accounts : Screen("accounts")
+    object Budgets : Screen("budgets")
     object AddTransaction : Screen("add_transaction")
     object EditTransaction : Screen("edit_transaction/{id}") {
         fun createRoute(id: String) = "edit_transaction/$id"
@@ -114,6 +117,13 @@ fun NavGraph(
                         restoreState = true
                     }
                 },
+                onNavigateToBudgets = {
+                    navController.navigate(Screen.Budgets.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 onNavigateToAddTransaction = {
                     navController.navigate(Screen.AddTransaction.route)
                 },
@@ -136,6 +146,41 @@ fun NavGraph(
             AccountsScreen(
                 state = state,
                 onIntent = { viewModel.handleIntent(it) },
+                onNavigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
+                },
+                onNavigateToBudgets = {
+                    navController.navigate(Screen.Budgets.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onLogout = {
+                    tokenManager.deleteToken()
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(Screen.Budgets.route) {
+            val viewModel: CategoryViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState()
+
+            BudgetsScreen(
+                state = state,
+                onIntent = { viewModel.handleIntent(it) },
+                onNavigateToAccounts = {
+                    navController.navigate(Screen.Accounts.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 onNavigateToDashboard = {
                     navController.navigate(Screen.Dashboard.route) {
                         popUpTo(Screen.Dashboard.route) { inclusive = true }

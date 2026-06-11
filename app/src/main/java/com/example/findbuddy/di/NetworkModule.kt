@@ -75,6 +75,30 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideCategoryApi(
+        retrofit: Retrofit
+    ): com.example.findbuddy.data.api.CategoryApi {
+        return retrofit.create(com.example.findbuddy.data.api.CategoryApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBudgetApi(
+        retrofit: Retrofit
+    ): com.example.findbuddy.data.api.BudgetApi {
+        return retrofit.create(com.example.findbuddy.data.api.BudgetApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDashboardApi(
+        retrofit: Retrofit
+    ): com.example.findbuddy.data.api.DashboardApi {
+        return retrofit.create(com.example.findbuddy.data.api.DashboardApi::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideSharedPreferences(
         @dagger.hilt.android.qualifiers.ApplicationContext context: android.content.Context
     ): android.content.SharedPreferences {

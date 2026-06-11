@@ -28,6 +28,7 @@ fun AccountsScreen(
     state: AccountState,
     onIntent: (AccountIntent) -> Unit,
     onNavigateToDashboard: () -> Unit,
+    onNavigateToBudgets: () -> Unit,
     onLogout: () -> Unit
 ) {
     var filterType by remember { mutableStateOf<String?>(null) } // null = All, BANK_ACCOUNT, CREDIT_CARD, CASH_WALLET
@@ -114,7 +115,7 @@ fun AccountsScreen(
                 )
                 NavigationBarItem(
                     selected = false,
-                    onClick = { /* Placeholder */ },
+                    onClick = onNavigateToBudgets,
                     icon = { Icon(Icons.Default.Savings, contentDescription = "Budgets") },
                     label = { Text("Budgets", fontSize = 11.sp) }
                 )

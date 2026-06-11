@@ -29,4 +29,16 @@ abstract class RepositoryModule {
     abstract fun bindTransactionRepository(
         transactionRepositoryImpl: com.example.findbuddy.data.repository.TransactionRepositoryImpl
     ): com.example.findbuddy.domain.repository.TransactionRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCategoryRepository(
+        categoryRepositoryImpl: com.example.findbuddy.data.repository.CategoryRepositoryImpl
+    ): com.example.findbuddy.domain.repository.CategoryRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBudgetRepository(
+        budgetRepositoryImpl: com.example.findbuddy.data.repository.BudgetRepositoryImpl
+    ): com.example.findbuddy.domain.repository.BudgetRepository
 }

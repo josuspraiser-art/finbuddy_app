@@ -21,6 +21,7 @@ import com.example.findbuddy.ui.theme.SurfaceContainerLow
 @Composable
 fun DashboardScreen(
     onNavigateToAccounts: () -> Unit,
+    onNavigateToBudgets: () -> Unit,
     onNavigateToAddTransaction: () -> Unit,
     onNavigateToEditTransaction: (String) -> Unit,
     onLogout: () -> Unit
@@ -61,7 +62,7 @@ fun DashboardScreen(
                 )
                 NavigationBarItem(
                     selected = false,
-                    onClick = { /* Placeholder */ },
+                    onClick = onNavigateToBudgets,
                     icon = { Icon(Icons.Default.Savings, contentDescription = "Budgets") },
                     label = { Text("Budgets", fontSize = 11.sp) }
                 )

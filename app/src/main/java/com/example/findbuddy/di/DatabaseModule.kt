@@ -39,5 +39,17 @@ object DatabaseModule {
     fun provideTransactionDao(database: FinBuddyDatabase): com.example.findbuddy.data.local.dao.TransactionDao {
         return database.transactionDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideCategoryDao(database: FinBuddyDatabase): com.example.findbuddy.data.local.dao.CategoryDao {
+        return database.categoryDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideBudgetDao(database: FinBuddyDatabase): com.example.findbuddy.data.local.dao.BudgetDao {
+        return database.budgetDao()
+    }
 }
 
