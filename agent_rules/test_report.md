@@ -6,10 +6,10 @@ This document records the results and execution status of all unit and instrumen
 
 ## 📊 Summary of Test Results (Current Run)
 
-* **Last Updated:** 2026-06-11T15:15:00+05:30 (Local Time)
+* **Last Updated:** 2026-06-11T20:00:00+05:30 (Local Time)
 * **Build / Test Status:** `SUCCESSFUL`
-* **Total Tests Executed:** 39 (Unit Tests)
-* **Total Passed:** 39
+* **Total Tests Executed:** 48 (Unit Tests)
+* **Total Passed:** 48
 * **Total Failed:** 0
 * **Success Rate:** 100%
 
@@ -21,6 +21,8 @@ This document records the results and execution status of all unit and instrumen
 | [TransactionViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/transactions/TransactionViewModelTest.kt) | Local Unit Test | 9 | 9 | 0 | PASSED |
 | [CategoryViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/CategoryViewModelTest.kt) | Local Unit Test | 7 | 7 | 0 | PASSED |
 | [BudgetViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/BudgetViewModelTest.kt) | Local Unit Test | 6 | 6 | 0 | PASSED |
+| [DashboardViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/dashboard/DashboardViewModelTest.kt) | Local Unit Test | 3 | 3 | 0 | PASSED |
+| [ReportViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/reports/ReportViewModelTest.kt) | Local Unit Test | 6 | 6 | 0 | PASSED |
 | [ExampleInstrumentedTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/androidTest/java/com/example/findbuddy/ExampleInstrumentedTest.kt) | Instrumented Test | 1 | - | - | UNRUN (Requires Device/Emulator) |
 
 ---
@@ -121,6 +123,29 @@ This document records the results and execution status of all unit and instrumen
 | 5 | `save limit fails when amount is invalid text` | Validates that budget limit creation fails with validation error when amount is non-numeric text. | PASSED |
 | 6 | `save limit succeeds with valid params` | Validates that setting a valid positive budget limit succeeds and closes the dialog. | PASSED |
 
+### 7. DashboardViewModelTest (MVI & Live Summary Stats)
+* **Class Path:** `com.example.findbuddy.ui.dashboard.DashboardViewModelTest`
+* **File:** [DashboardViewModelTest.kt](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/dashboard/DashboardViewModelTest.kt)
+
+| Sr. No. | Test Case Name | Description | Status |
+| :---: | :--- | :--- | :---: |
+| 1 | `initial state is populated from repository` | Validates that ViewModel state properties represent the combined account/transaction stats correctly. | PASSED |
+| 2 | `intent load dashboard triggers repository sync` | Validates that calling load intent triggers underlying data synchronization correctly. | PASSED |
+| 3 | `intent change period updates selected month and year and triggers sync` | Validates that filtering by a different period correctly sets state date bounds. | PASSED |
+
+### 8. ReportViewModelTest (MVI & Reports Calculations)
+* **Class Path:** `com.example.findbuddy.ui.reports.ReportViewModelTest`
+* **File:** [ReportViewModelTest.kt](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/reports/ReportViewModelTest.kt)
+
+| Sr. No. | Test Case Name | Description | Status |
+| :---: | :--- | :--- | :---: |
+| 1 | `initial state loads reports and fetches categories and accounts` | Validates that category and account selections, along with default monthly period state, are initialized. | PASSED |
+| 2 | `period change updates state and re-fetches reports` | Validates that changing the period from Monthly to Weekly updates state and triggers database sync. | PASSED |
+| 3 | `filter by category updates state values` | Validates that selecting a specific category filter updates the state total expenses. | PASSED |
+| 4 | `filter by account updates state values` | Validates that selecting a specific account filter updates the state total income. | PASSED |
+| 5 | `average daily spend is calculated correctly` | Validates that average daily spends are computed correctly by dividing total expenses by period days. | PASSED |
+| 6 | `largest single expense is extracted correctly` | Validates that largest single expense amount and formatted description are extracted correctly. | PASSED |
+
 ---
 
 ## ⏭️ Instructions for Logging Future Test Cases
@@ -144,3 +169,5 @@ All developers and AI agents must update this document whenever new tests are ad
 | 2026-06-11T13:10:21+05:30 | Implementation of Module 3 (Transaction MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (26 Passed, 0 Failed) | Antigravity AI |
 | 2026-06-11T15:05:00+05:30 | Implementation of Module 4 (Categories DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (33 Passed, 0 Failed) | Antigravity AI |
 | 2026-06-11T15:15:00+05:30 | Implementation of Module 5 (Budgets DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (39 Passed, 0 Failed) | Antigravity AI |
+| 2026-06-11T19:50:00+05:30 | Implementation of Module 6 (Dashboard DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (42 Passed, 0 Failed) | Antigravity AI |
+| 2026-06-11T20:00:00+05:30 | Implementation of Module 7 (Reports DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (48 Passed, 0 Failed) | Antigravity AI |

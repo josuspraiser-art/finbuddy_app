@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "http://10.0.2.2:8080/"
+    private const val BASE_URL = "https://agreeably-generic-headway.ngrok-free.dev/"
 
     @Provides
     @Singleton
@@ -95,6 +95,14 @@ object NetworkModule {
         retrofit: Retrofit
     ): com.example.findbuddy.data.api.DashboardApi {
         return retrofit.create(com.example.findbuddy.data.api.DashboardApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReportApi(
+        retrofit: Retrofit
+    ): com.example.findbuddy.data.api.ReportApi {
+        return retrofit.create(com.example.findbuddy.data.api.ReportApi::class.java)
     }
 
     @Provides

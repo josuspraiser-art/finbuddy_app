@@ -35,6 +35,7 @@ fun BudgetsScreen(
     onIntent: (CategoryIntent) -> Unit,
     onNavigateToAccounts: () -> Unit,
     onNavigateToDashboard: () -> Unit,
+    onNavigateToReports: () -> Unit,
     onLogout: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -108,7 +109,7 @@ fun BudgetsScreen(
                 )
                 NavigationBarItem(
                     selected = false,
-                    onClick = { /* Placeholder */ },
+                    onClick = onNavigateToReports,
                     icon = { Icon(Icons.Default.Analytics, contentDescription = "Reports") },
                     label = { Text("Reports", fontSize = 11.sp) }
                 )

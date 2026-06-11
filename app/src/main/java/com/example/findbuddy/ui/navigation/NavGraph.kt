@@ -27,6 +27,7 @@ sealed class Screen(val route: String) {
     object Dashboard : Screen("dashboard")
     object Accounts : Screen("accounts")
     object Budgets : Screen("budgets")
+    object Reports : Screen("reports")
     object AddTransaction : Screen("add_transaction")
     object EditTransaction : Screen("edit_transaction/{id}") {
         fun createRoute(id: String) = "edit_transaction/$id"
@@ -109,7 +110,12 @@ fun NavGraph(
         }
 
         composable(Screen.Dashboard.route) {
+            val viewModel: com.example.findbuddy.ui.dashboard.DashboardViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState()
+
             DashboardScreen(
+                state = state,
+                onIntent = { viewModel.handleIntent(it) },
                 onNavigateToAccounts = {
                     navController.navigate(Screen.Accounts.route) {
                         popUpTo(Screen.Dashboard.route) { saveState = true }
@@ -119,6 +125,13 @@ fun NavGraph(
                 },
                 onNavigateToBudgets = {
                     navController.navigate(Screen.Budgets.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onNavigateToReports = {
+                    navController.navigate(Screen.Reports.route) {
                         popUpTo(Screen.Dashboard.route) { saveState = true }
                         launchSingleTop = true
                         restoreState = true
@@ -158,6 +171,13 @@ fun NavGraph(
                         restoreState = true
                     }
                 },
+                onNavigateToReports = {
+                    navController.navigate(Screen.Reports.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 onLogout = {
                     tokenManager.deleteToken()
                     navController.navigate(Screen.Login.route) {
@@ -184,6 +204,48 @@ fun NavGraph(
                 onNavigateToDashboard = {
                     navController.navigate(Screen.Dashboard.route) {
                         popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
+                },
+                onNavigateToReports = {
+                    navController.navigate(Screen.Reports.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onLogout = {
+                    tokenManager.deleteToken()
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(Screen.Reports.route) {
+            val viewModel: com.example.findbuddy.ui.reports.ReportViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsState()
+
+            com.example.findbuddy.ui.reports.ReportsScreen(
+                state = state,
+                onIntent = { viewModel.handleIntent(it) },
+                onNavigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
+                },
+                onNavigateToAccounts = {
+                    navController.navigate(Screen.Accounts.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+                onNavigateToBudgets = {
+                    navController.navigate(Screen.Budgets.route) {
+                        popUpTo(Screen.Dashboard.route) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
                     }
                 },
                 onLogout = {

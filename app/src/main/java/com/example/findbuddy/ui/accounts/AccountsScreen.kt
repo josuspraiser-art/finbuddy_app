@@ -29,6 +29,7 @@ fun AccountsScreen(
     onIntent: (AccountIntent) -> Unit,
     onNavigateToDashboard: () -> Unit,
     onNavigateToBudgets: () -> Unit,
+    onNavigateToReports: () -> Unit,
     onLogout: () -> Unit
 ) {
     var filterType by remember { mutableStateOf<String?>(null) } // null = All, BANK_ACCOUNT, CREDIT_CARD, CASH_WALLET
@@ -121,7 +122,7 @@ fun AccountsScreen(
                 )
                 NavigationBarItem(
                     selected = false,
-                    onClick = { /* Placeholder */ },
+                    onClick = onNavigateToReports,
                     icon = { Icon(Icons.Default.Analytics, contentDescription = "Reports") },
                     label = { Text("Reports", fontSize = 11.sp) }
                 )

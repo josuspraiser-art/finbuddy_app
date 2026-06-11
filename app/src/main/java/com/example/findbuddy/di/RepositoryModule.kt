@@ -41,4 +41,16 @@ abstract class RepositoryModule {
     abstract fun bindBudgetRepository(
         budgetRepositoryImpl: com.example.findbuddy.data.repository.BudgetRepositoryImpl
     ): com.example.findbuddy.domain.repository.BudgetRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindDashboardRepository(
+        dashboardRepositoryImpl: com.example.findbuddy.data.repository.DashboardRepositoryImpl
+    ): com.example.findbuddy.domain.repository.DashboardRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindReportRepository(
+        reportRepositoryImpl: com.example.findbuddy.data.repository.ReportRepositoryImpl
+    ): com.example.findbuddy.domain.repository.ReportRepository
 }
