@@ -80,3 +80,44 @@ create a prompt_log.md file inside @[agent_rules] , the document should have all
 use @[agent_rules/android_persona.md] @[agent_rules/master_prd.md] @[agent_rules/master_kpi.md] @[agent_rules/save_token.md] and create project_boundaries.md file inside @[agent_rules] , keep it precise and concise, do not add similar content to project scope
 ```
 
+---
+
+## Prompt 7
+* **Local Timestamp:** 2026-06-11T12:27:11+05:30
+* **Goal:** Create `test_report.md` in `agent_rules`
+* **Content:**
+```text
+create a test_report.md file inside @[agent_rules] , this file should containt all the test results with its status till now, and also add from now for all the test cases.
+```
+
+---
+
+## Prompt 8
+* **Local Timestamp:** 2026-06-11T12:30:56+05:30
+* **Goal:** Create implementation plan for Module 2
+* **Content:**
+```text
+use @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\android_persona.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_prd.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_kpi.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_scope.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_boundaries.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\api_doc.md]  and create implementation plan for module 2
+
+For ui design strictly follow this - 
+@mcp:StitchMCP:get_project:4639296201462069600
+
+Do not add any screen on own strictly, do not add any own idea.
+```
+
+---
+
+## Prompt 9
+* **Local Timestamp:** 2026-06-11T13:00:06+05:30
+* **Goal:** Create implementation plan for Module 3
+* **Content:**
+```text
+use @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\android_persona.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_prd.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\master_kpi.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_scope.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\project_boundaries.md] @[c:\Users\user\Josus\finalPOC\finBuddyApp\agent_rules\api_doc.md]  and create implementation plan for module 3
+
+For ui design strictly follow this - 
+@mcp:StitchMCP:get_project:4639296201462069600
+
+Do not add any screen on own strictly, do not add any own idea.
+```
+
+
