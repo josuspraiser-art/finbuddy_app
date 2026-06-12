@@ -37,6 +37,9 @@ class ReportViewModel @Inject constructor(
     private val _state = MutableStateFlow(ReportState(anchorDate = LocalDate.now().toString()))
     val state: StateFlow<ReportState> = _state.asStateFlow()
 
+    private val _effect = MutableSharedFlow<ReportEffect>()
+    val effect: SharedFlow<ReportEffect> = _effect.asSharedFlow()
+
     private val _period = MutableStateFlow("monthly")
     private val _categoryId = MutableStateFlow<String?>(null)
     private val _accountId = MutableStateFlow<String?>(null)
@@ -205,8 +208,34 @@ class ReportViewModel @Inject constructor(
                 _anchorDate.value = intent.date
                 loadReportData()
             }
+            is ReportIntent.ExportPdf -> {
+                exportPdf(intent.outputFile)
+            }
             is ReportIntent.ClearError -> {
                 _state.value = _state.value.copy(errorMsg = null)
+            }
+        }
+    }
+
+    private fun exportPdf(outputFile: java.io.File) {
+        _state.value = _state.value.copy(isLoading = true)
+        viewModelScope.launch {
+            val type = if (_categoryId.value != null) "category" else if (_accountId.value != null) "account" else "income-expense"
+            val result = reportRepository.exportPdfReport(
+                userId = userId,
+                reportType = type,
+                period = _period.value,
+                date = _anchorDate.value,
+                accountId = _accountId.value,
+                categoryId = _categoryId.value,
+                outputFile = outputFile
+            )
+            _state.value = _state.value.copy(isLoading = false)
+            result.onSuccess {
+                _effect.emit(ReportEffect.OpenPdf(outputFile))
+            }.onFailure { error ->
+                _state.value = _state.value.copy(errorMsg = error.message ?: "Export failed")
+                _effect.emit(ReportEffect.ShowToast(error.message ?: "PDF Export failed"))
             }
         }
     }
@@ -272,4 +301,9 @@ class ReportViewModel @Inject constructor(
         val transactions: List<com.example.findbuddy.domain.model.Transaction>,
         val budgets: List<com.example.findbuddy.domain.model.Budget>
     )
+}
+
+sealed class ReportEffect {
+    data class OpenPdf(val file: java.io.File) : ReportEffect()
+    data class ShowToast(val message: String) : ReportEffect()
 }

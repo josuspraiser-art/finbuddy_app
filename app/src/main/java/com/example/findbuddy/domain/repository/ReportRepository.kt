@@ -10,4 +10,13 @@ interface ReportRepository {
     fun getCategoryReport(userId: String, period: String, date: String): Flow<CategoryReportResponse>
     fun getAccountReport(userId: String, period: String, date: String): Flow<AccountReportResponse>
     suspend fun syncReports(userId: String, period: String, date: String): Result<Unit>
+    suspend fun exportPdfReport(
+        userId: String,
+        reportType: String,
+        period: String,
+        date: String?,
+        accountId: String?,
+        categoryId: String?,
+        outputFile: java.io.File
+    ): Result<Unit>
 }

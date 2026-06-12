@@ -25,4 +25,13 @@ interface ReportApi {
         @Query("period") period: String,
         @Query("date") date: String?
     ): AccountReportResponse
+
+    @GET("api/reports/export/pdf")
+    suspend fun exportPdfReport(
+        @Query("reportType") reportType: String,
+        @Query("period") period: String,
+        @Query("date") date: String?,
+        @Query("accountId") accountId: String?,
+        @Query("categoryId") categoryId: String?
+    ): okhttp3.ResponseBody
 }

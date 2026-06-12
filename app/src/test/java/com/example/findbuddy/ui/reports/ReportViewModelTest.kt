@@ -10,6 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Assert.*
@@ -163,6 +164,49 @@ class ReportViewModelTest {
         assertTrue(state.largestSingleExpenseDesc.contains("Groceries"))
     }
 
+    @Test
+    fun `export pdf success triggers effect`() = runTest(testDispatcher) {
+        testScheduler.advanceUntilIdle() // settle initialization
+        val dummyFile = java.io.File("dummy.pdf")
+        reportRepository.exportPdfResult = Result.success(Unit)
+
+        val effects = mutableListOf<ReportEffect>()
+        val collectJob = launch {
+            viewModel.effect.collect { effects.add(it) }
+        }
+
+        viewModel.handleIntent(ReportIntent.ExportPdf(dummyFile))
+        testScheduler.advanceUntilIdle()
+
+        assertEquals(1, effects.size)
+        assertTrue(effects[0] is ReportEffect.OpenPdf)
+        assertEquals(dummyFile, (effects[0] as ReportEffect.OpenPdf).file)
+
+        collectJob.cancel()
+    }
+
+    @Test
+    fun `export pdf failure sets error and triggers toast`() = runTest(testDispatcher) {
+        testScheduler.advanceUntilIdle() // settle initialization
+        val dummyFile = java.io.File("dummy.pdf")
+        reportRepository.exportPdfResult = Result.failure(Exception("Disk Full"))
+
+        val effects = mutableListOf<ReportEffect>()
+        val collectJob = launch {
+            viewModel.effect.collect { effects.add(it) }
+        }
+
+        viewModel.handleIntent(ReportIntent.ExportPdf(dummyFile))
+        testScheduler.advanceUntilIdle()
+
+        assertEquals(1, effects.size)
+        assertTrue(effects[0] is ReportEffect.ShowToast)
+        assertEquals("Disk Full", (effects[0] as ReportEffect.ShowToast).message)
+        assertEquals("Disk Full", viewModel.state.value.errorMsg)
+
+        collectJob.cancel()
+    }
+
     // Fakes implementation
     private class FakeReportRepository : ReportRepository {
         var syncCalled = false
@@ -204,6 +248,22 @@ class ReportViewModelTest {
         override suspend fun syncReports(userId: String, period: String, date: String): Result<Unit> {
             syncCalled = true
             return Result.success(Unit)
+        }
+
+        var exportPdfResult: Result<Unit> = Result.success(Unit)
+        var exportPdfParams: List<Any?> = emptyList()
+
+        override suspend fun exportPdfReport(
+            userId: String,
+            reportType: String,
+            period: String,
+            date: String?,
+            accountId: String?,
+            categoryId: String?,
+            outputFile: java.io.File
+        ): Result<Unit> {
+            exportPdfParams = listOf(userId, reportType, period, date, accountId, categoryId, outputFile)
+            return exportPdfResult
         }
     }
 

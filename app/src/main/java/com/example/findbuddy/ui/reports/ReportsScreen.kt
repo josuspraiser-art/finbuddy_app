@@ -522,7 +522,8 @@ fun ReportsScreen(
                 // Export PDF Action
                 Button(
                     onClick = {
-                        Toast.makeText(context, "Exporting PDF... (Ready in Module 8)", Toast.LENGTH_SHORT).show()
+                        val file = java.io.File(context.cacheDir, "finbuddy_report.pdf")
+                        onIntent(ReportIntent.ExportPdf(file))
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),

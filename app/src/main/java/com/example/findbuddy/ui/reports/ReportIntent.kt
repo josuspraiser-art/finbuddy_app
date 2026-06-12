@@ -6,5 +6,6 @@ sealed class ReportIntent {
     data class FilterByCategory(val categoryId: String?) : ReportIntent()
     data class FilterByAccount(val accountId: String?) : ReportIntent()
     data class ChangeAnchorDate(val date: String) : ReportIntent()
+    data class ExportPdf(val outputFile: java.io.File) : ReportIntent()
     object ClearError : ReportIntent()
 }

@@ -225,6 +225,34 @@ fun NavGraph(
         composable(Screen.Reports.route) {
             val viewModel: com.example.findbuddy.ui.reports.ReportViewModel = hiltViewModel()
             val state by viewModel.state.collectAsState()
+            val context = androidx.compose.ui.platform.LocalContext.current
+
+            LaunchedEffect(key1 = true) {
+                viewModel.effect.collectLatest { effect ->
+                    when (effect) {
+                        is com.example.findbuddy.ui.reports.ReportEffect.OpenPdf -> {
+                            val uri = androidx.core.content.FileProvider.getUriForFile(
+                                context,
+                                "com.example.findbuddy.fileprovider",
+                                effect.file
+                            )
+                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW).apply {
+                                setDataAndType(uri, "application/pdf")
+                                addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                addFlags(android.content.Intent.FLAG_ACTIVITY_NO_HISTORY)
+                            }
+                            try {
+                                context.startActivity(android.content.Intent.createChooser(intent, "Open PDF Report"))
+                            } catch (e: Exception) {
+                                android.widget.Toast.makeText(context, "No PDF reader application found", android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        is com.example.findbuddy.ui.reports.ReportEffect.ShowToast -> {
+                            android.widget.Toast.makeText(context, effect.message, android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
 
             com.example.findbuddy.ui.reports.ReportsScreen(
                 state = state,

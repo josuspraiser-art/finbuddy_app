@@ -6,10 +6,10 @@ This document records the results and execution status of all unit and instrumen
 
 ## 📊 Summary of Test Results (Current Run)
 
-* **Last Updated:** 2026-06-11T20:00:00+05:30 (Local Time)
+* **Last Updated:** 2026-06-12T13:10:00+05:30 (Local Time)
 * **Build / Test Status:** `SUCCESSFUL`
-* **Total Tests Executed:** 48 (Unit Tests)
-* **Total Passed:** 48
+* **Total Tests Executed:** 50 (Unit Tests)
+* **Total Passed:** 50
 * **Total Failed:** 0
 * **Success Rate:** 100%
 
@@ -22,7 +22,7 @@ This document records the results and execution status of all unit and instrumen
 | [CategoryViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/CategoryViewModelTest.kt) | Local Unit Test | 7 | 7 | 0 | PASSED |
 | [BudgetViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/categories/BudgetViewModelTest.kt) | Local Unit Test | 6 | 6 | 0 | PASSED |
 | [DashboardViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/dashboard/DashboardViewModelTest.kt) | Local Unit Test | 3 | 3 | 0 | PASSED |
-| [ReportViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/reports/ReportViewModelTest.kt) | Local Unit Test | 6 | 6 | 0 | PASSED |
+| [ReportViewModelTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/test/java/com/example/findbuddy/ui/reports/ReportViewModelTest.kt) | Local Unit Test | 8 | 8 | 0 | PASSED |
 | [ExampleInstrumentedTest](file:///c:/Users/user/Josus/finalPOC/finBuddyApp/app/src/androidTest/java/com/example/findbuddy/ExampleInstrumentedTest.kt) | Instrumented Test | 1 | - | - | UNRUN (Requires Device/Emulator) |
 
 ---
@@ -145,6 +145,8 @@ This document records the results and execution status of all unit and instrumen
 | 4 | `filter by account updates state values` | Validates that selecting a specific account filter updates the state total income. | PASSED |
 | 5 | `average daily spend is calculated correctly` | Validates that average daily spends are computed correctly by dividing total expenses by period days. | PASSED |
 | 6 | `largest single expense is extracted correctly` | Validates that largest single expense amount and formatted description are extracted correctly. | PASSED |
+| 7 | `export pdf success triggers effect` | Validates that dispatching ExportPdf intent on success repository response emits OpenPdf effect. | PASSED |
+| 8 | `export pdf failure sets error and triggers toast` | Validates that dispatching ExportPdf intent on repository failure sets state errorMsg and emits ShowToast. | PASSED |
 
 ---
 
@@ -171,3 +173,4 @@ All developers and AI agents must update this document whenever new tests are ad
 | 2026-06-11T15:15:00+05:30 | Implementation of Module 5 (Budgets DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (39 Passed, 0 Failed) | Antigravity AI |
 | 2026-06-11T19:50:00+05:30 | Implementation of Module 6 (Dashboard DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (42 Passed, 0 Failed) | Antigravity AI |
 | 2026-06-11T20:00:00+05:30 | Implementation of Module 7 (Reports DB/MVI) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (48 Passed, 0 Failed) | Antigravity AI |
+| 2026-06-12T13:10:00+05:30 | Implementation of Module 8 (PDF Export) | `.\gradlew.bat test` | `BUILD SUCCESSFUL` (50 Passed, 0 Failed) | Antigravity AI |
